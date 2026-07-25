@@ -7,52 +7,30 @@
     body { background: #141414; color: white; font-family: Arial, sans-serif; margin: 0; }
     header { background: #000; padding: 20px 40px; font-size: 28px; font-weight: bold; color: #E50914; }
     h2 { padding: 20px 40px 10px 40px; }
-    .reihe { display: flex; gap: 10px; padding: 0 40px 20px 40px; overflow-x: auto; }
-    .film { min-width: 220px; height: 330px; background: #222; border-radius: 5px; text-align: center; cursor: pointer; transition: transform 0.2s; }
-    .film:hover { transform: scale(1.05); }
-    .film img { width: 100%; height: 280px; object-fit: cover; border-radius: 5px 5px 0 0; }
-    #player { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 999; }
-    #player video { width: 90%; max-width: 1200px; height: auto; margin: 5% auto; display: block; background: black; }
-    #close { position: absolute; top: 20px; right: 40px; font-size: 40px; cursor: pointer; color: white; z-index: 1000; }
+    .reihe { display: flex; gap: 15px; padding: 0 40px 20px 40px; overflow-x: auto; }
+    .film { min-width: 220px; cursor: pointer; }
+    .film img { width: 100%; height: 280px; object-fit: cover; border-radius: 5px; }
+    .film p { text-align: center; margin: 5px 0; }
+    video { width: 90%; max-width: 1000px; margin: 20px 40px; background: black; border-radius: 5px; }
   </style>
 </head>
 <body>
   <header>MeinNetflix</header>
 
-  <h2>Kostenlose Filme - TEST</h2>
+  <h2>Kostenlose Filme</h2>
   <div class="reihe">
-    <div class="film" onclick="playVideo('https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')">
+    <div class="film" onclick="document.getElementById('v').src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'; document.getElementById('v').play();">
       <img src="https://picsum.photos/220/280?1"><p>Big Buck Bunny</p>
     </div>
-    <div class="film" onclick="playVideo('https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4')">
+    <div class="film" onclick="document.getElementById('v').src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'; document.getElementById('v').play();">
       <img src="https://picsum.photos/220/280?2"><p>Elephants Dream</p>
     </div>
-    <div class="film" onclick="playVideo('https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4')">
+    <div class="film" onclick="document.getElementById('v').src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4'; document.getElementById('v').play();">
       <img src="https://picsum.photos/220/280?3"><p>Sintel</p>
     </div>
   </div>
 
-  <div id="player">
-    <span id="close" onclick="closeVideo()">×</span>
-    <video id="video" controls></video>
-  </div>
+  <video id="v" controls></video>
 
-  <script>
-    function playVideo(url) {
-      let player = document.getElementById('player');
-      let video = document.getElementById('video');
-      player.style.display = 'block';
-      video.src = url;
-      video.load();
-      video.play().catch(e => alert('Fehler: ' + e.message));
-    }
-    function closeVideo() {
-      let player = document.getElementById('player');
-      let video = document.getElementById('video');
-      player.style.display = 'none';
-      video.pause();
-      video.src = '';
-    }
-  </script>
 </body>
 </html>
