@@ -1,8 +1,31 @@
-﻿<!DOCTYPE html><html lang="de"><head><title>MeinNetflix DE</title><meta charset="UTF-8"><style>body{background:#141414;color:white;font-family:Arial;padding:20px}h1{color:#E50914;text-align:center}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px}.kachel{background:#222;padding:10px;border-radius:8px;text-align:center;cursor:pointer}.kachel:hover{background:#E50914}#player{width:100%;max-width:1200px;margin:20px auto;display:block;border-radius:8px}img{width:100%;height:100px;object-fit:contain;background:#000}</style></head><body>
-<h1>🍿 MEINNETFLIX - DEUTSCHLAND</h1>
-<video id="player" controls autoplay></video>
-<div id="channels" class="grid"></div>
-<script>
-const SENDER=[{n:"Das Erste",l:"https://upload.wikimedia.org/wikipedia/commons/3/3e/Das_Erste_Logo_2015.svg",u:"https://daserste-live.akamaized.net/deutsche-welle/dw-stream03/manifest.mpd"},{n:"ZDF",l:"https://upload.wikimedia.org/wikipedia/commons/1/1c/ZDF_logo_2021.svg",u:"https://zdf-hlsplus.akamaized.net/de/live/13_2/manifest.mpd"},{n:"RTL",l:"https://upload.wikimedia.org/wikipedia/commons/3/3d/RTL_Logo_2018.svg",u:"https://rtl-live.cdn.arkona.io/rtl/hd/index.m3u8"},{n:"ProSieben",l:"https://upload.wikimedia.org/wikipedia/commons/5/5e/ProSieben_Logo_2014.svg",u:"https://prosieben-live.cdn.arkona.io/prosieben/hd/index.m3u8"},{n:"SAT.1",l:"https://upload.wikimedia.org/wikipedia/commons/5/5b/SAT.1_Logo_2018.svg",u:"https://sat1-live.cdn.arkona.io/sat1/hd/index.m3u8"}];
-SENDER.forEach(s=>{document.getElementById('channels').innerHTML+=`<div class="kachel" onclick="player.src='${s.u}';player.play();window.scrollTo(0,0)"><img src="${s.l}"><p>${s.n}</p></div>`});
-</script></body></html>
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>MeinNetflix</title>
+  <style>
+    body { background: #141414; color: white; font-family: Arial, sans-serif; margin: 0; }
+    header { background: #000; padding: 20px; font-size: 28px; font-weight: bold; color: #E50914; }
+    h2 { padding: 20px 20px 10px 20px; }
+    .reihe { display: flex; gap: 10px; padding: 0 20px 20px 20px; overflow-x: auto; }
+    .film { min-width: 200px; height: 300px; background: #222; border-radius: 5px; text-align: center; transition: transform 0.2s; }
+    .film:hover { transform: scale(1.1); }
+    .film img { width: 100%; height: 250px; object-fit: cover; border-radius: 5px 5px 0 0; }
+    .film p { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <header>MeinNetflix</header>
+  <h2>Beliebte Filme</h2>
+  <div class="reihe">
+    <div class="film"><img src="https://image.tmdb.org/t/p/w500/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg"><p>Avatar</p></div>
+    <div class="film"><img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg"><p>Avengers</p></div>
+    <div class="film"><img src="https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"><p>Spider-Man</p></div>
+  </div>
+  <h2>Deutsche Filme</h2>
+  <div class="reihe">
+    <div class="film"><img src="https://image.tmdb.org/t/p/w500/wWba3TaojhK7NdycRhoQpsG0FaH.jpg"><p>Das Boot</p></div>
+    <div class="film"><img src="https://image.tmdb.org/t/p/w500/aQvJ5WPzZgYVDrxLX4RwKZ1h0bV.jpg"><p>Fack ju Göhte</p></div>
+  </div>
+</body>
+</html>
