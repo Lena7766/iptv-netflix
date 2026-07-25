@@ -2,72 +2,52 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>MeinNetflix Dashboard</title>
+  <title>MeinNetflix</title>
   <style>
     body { background: #141414; color: white; font-family: Arial, sans-serif; margin: 0; }
-    header { background: #000; padding: 15px 40px; display: flex; align-items: center; gap: 40px; }
-    .logo { color: #E50914; font-size: 24px; font-weight: bold; }
-    .menu { color: #aaa; font-size: 14px; }
-    .menu span { margin-right: 20px; cursor: pointer; }
-    .menu .active { color: white; border-bottom: 2px solid #E50914; padding-bottom: 3px; }
-    
-    h2 { padding: 20px 40px 10px 40px; font-size: 20px; }
-    .reihe { display: flex; gap: 8px; padding: 0 40px 20px 40px; overflow-x: auto; }
-    .reihe::-webkit-scrollbar { height: 8px; }
-    .reihe::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
-    
-    .kachel { min-width: 220px; height: 320px; background: #222; border-radius: 4px; position: relative; transition: all 0.3s; cursor: pointer; }
-    .kachel:hover { transform: scale(1.1); z-index: 10; }
-    .kachel img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
-    .kachel .info { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, black); padding: 10px; opacity: 0; transition: 0.3s; }
-    .kachel:hover .info { opacity: 1; }
-    .kachel .info button { background: white; color: black; border: none; padding: 5px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
-    
-    .featured { grid-column: span 2; min-width: 400px; }
+    header { background: #000; padding: 20px 40px; font-size: 28px; font-weight: bold; color: #E50914; }
+    h2 { padding: 20px 40px 10px 40px; }
+    .reihe { display: flex; gap: 10px; padding: 0 40px 20px 40px; overflow-x: auto; }
+    .film { min-width: 220px; height: 330px; background: #222; border-radius: 5px; text-align: center; cursor: pointer; transition: transform 0.2s; }
+    .film:hover { transform: scale(1.05); }
+    .film img { width: 100%; height: 280px; object-fit: cover; border-radius: 5px 5px 0 0; }
+    #player { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 999; }
+    #player video { width: 80%; height: 80%; margin: 5% 10%; }
+    #close { position: absolute; top: 20px; right: 40px; font-size: 40px; cursor: pointer; color: white; }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">MEINFLIX</div>
-    <div class="menu">
-      <span class="active">DASHBOARD</span>
-      <span>SERIEN</span>
-      <span>FILME</span>
-    </div>
-  </header>
+  <header>MeinNetflix</header>
 
-  <h2>ANGESAGTE SERIEN</h2>
+  <h2>Kostenlose Filme</h2>
   <div class="reihe">
-    <div class="kachel" onclick="window.open('https://www.netzkino.de/serien/')">
-      <img src="https://image.tmdb.org/t/p/w500/5w2R8WvQj6t8gW3hE3rHvN0J3p.jpg"><div class="info"><button>▶ Details</button></div>
+    <div class="film" onclick="playVideo('https://archive.org/download/NightOfTheLivingDead/night_of_the_living_dead.mp4')">
+      <img src="https://image.tmdb.org/t/p/w500/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg"><p>Night of the Living Dead</p>
     </div>
-    <div class="kachel featured" onclick="window.open('https://www.netzkino.de/serien/')">
-      <img src="https://image.tmdb.org/t/p/w780/8QVDXDiOGHRcAD4oM6MXjE0osSj.jpg"><div class="info"><button>▶ Details</button><p>Lucky - Drama Krimi</p></div>
+    <div class="film" onclick="playVideo('https://archive.org/download/charliechaplinmoderntimes/modern_times.mp4')">
+      <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg"><p>Modern Times - Chaplin</p>
     </div>
-    <div class="kachel" onclick="window.open('https://www.netzkino.de/serien/')">
-      <img src="https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZUJtlG3Z8uNk2kVB.jpg"><div class="info"><button>▶ Details</button></div>
-    </div>
-    <div class="kachel" onclick="window.open('https://www.netzkino.de/serien/')">
-      <img src="https://image.tmdb.org/t/p/w500/1E5baAaEse4ZfDYeRKfRDaKQ5pU.jpg"><div class="info"><button>▶ Details</button></div>
+    <div class="film" onclick="playVideo('https://archive.org/download/PlanetNineFromOuterSpace/Plan9FromOuterSpace.mp4')">
+      <img src="https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"><p>Plan 9 From Outer Space</p>
     </div>
   </div>
 
-  <h2>BELIEBTE SERIEN</h2>
-  <div class="reihe">
-    <div class="kachel" onclick="window.open('https://www.netzkino.de/serien/')"><img src="https://image.tmdb.org/t/p/w500/o6N4H8L5lN6aZ8Fh9l8R7E6d5c4.jpg"></div>
-    <div class="kachel" onclick="window.open('https://www.netzkino.de/serien/')"><img src="https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZUJtlG3Z8uNk2kVB.jpg"></div>
-    <div class="kachel" onclick="window.open('https://www.netzkino.de/serien/')"><img src="https://image.tmdb.org/t/p/w500/uOOtwVdP3uNLSA8i7f5M0c9YJbA.jpg"></div>
-    <div class="kachel" onclick="window.open('https://www.netzkino.de/serien/')"><img src="https://image.tmdb.org/t/p/w500/6tfT03sGp9k6U0bA6lG2K3J4H5.jpg"></div>
-    <div class="kachel" onclick="window.open('https://www.netzkino.de/serien/')"><img src="https://image.tmdb.org/t/p/w500/8QVDXDiOGHRcAD4oM6MXjE0osSj.jpg"></div>
+  <div id="player">
+    <span id="close" onclick="closeVideo()">×</span>
+    <video id="video" controls></video>
   </div>
 
-  <h2>ANGESAGTE FILME</h2>
-  <div class="reihe">
-    <div class="kachel" onclick="window.open('https://www.netzkino.de/filme/')"><img src="https://image.tmdb.org/t/p/w500/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg"></div>
-    <div class="kachel" onclick="window.open('https://www.netzkino.de/filme/')"><img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg"></div>
-    <div class="kachel" onclick="window.open('https://www.netzkino.de/filme/')"><img src="https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"></div>
-    <div class="kachel" onclick="window.open('https://www.netzkino.de/filme/')"><img src="https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"></div>
-  </div>
-
+  <script>
+    function playVideo(url) {
+      document.getElementById('video').src = url;
+      document.getElementById('player').style.display = 'block';
+      document.getElementById('video').play();
+    }
+    function closeVideo() {
+      document.getElementById('player').style.display = 'none';
+      document.getElementById('video').pause();
+      document.getElementById('video').src = '';
+    }
+  </script>
 </body>
 </html>
