@@ -1,0 +1,11 @@
+<!DOCTYPE html><html lang="de"><head><title>MeinNetflix DE</title><meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<style>body{background:#141414;color:white;font-family:Arial;padding:20px;margin:0}h1{color:#E50914;text-align:center}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px}.kachel{background:#222;padding:15px;border-radius:8px;text-align:center;cursor:pointer}.kachel:hover{background:#E50914}#player{width:100%;max-width:1200px;margin:20px auto;display:block;border-radius:8px;background:#000}img{width:100%;height:100px;object-fit:contain;background:#000}</style></head><body>
+<h1>🍿 MEINNETFLIX - DEUTSCHLAND</h1>
+<video id="player" controls autoplay></video><div id="channels" class="grid"></div>
+<script>
+const video=document.getElementById('player');
+const SENDER=[{n:"Das Erste",l:"https://upload.wikimedia.org/wikipedia/commons/3/3e/Das_Erste_Logo_2015.svg",u:"https://daserste-live.akamaized.net/deutsche-welle/dw-stream03/manifest.mpd"},{n:"ZDF",l:"https://upload.wikimedia.org/wikipedia/commons/1/1c/ZDF_logo_2021.svg",u:"https://zdf-hlsplus.akamaized.net/de/live/13_2/manifest.mpd"},{n:"RTL",l:"https://upload.wikimedia.org/wikipedia/commons/3/3d/RTL_Logo_2018.svg",u:"https://rtl-live.cdn.arkona.io/rtl/hd/index.m3u8"}];
+function playStream(url){if(Hls.isSupported()){var hls=new Hls();hls.loadSource(url);hls.attachMedia(video);}else{video.src=url;}video.play();}
+SENDER.forEach(s=>{document.getElementById('channels').innerHTML+=`<div class="kachel" onclick="playStream('${s.u}')"><img src="${s.l}"><p>${s.n}</p></div>`});
+</script></body></html>
