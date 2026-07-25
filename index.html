@@ -8,60 +8,39 @@
     header { background: #000; padding: 20px 40px; font-size: 28px; font-weight: bold; color: #E50914; }
     h2 { padding: 20px 40px 10px 40px; }
     .reihe { display: flex; gap: 15px; padding: 0 40px 20px 40px; overflow-x: auto; }
-    .reihe::-webkit-scrollbar { height: 8px; }
-    .reihe::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
-    .film { min-width: 200px; cursor: pointer; transition: transform 0.2s; }
-    .film:hover { transform: scale(1.08); }
-    .film img { width: 100%; height: 280px; object-fit: cover; border-radius: 5px; }
-    .film p { text-align: center; margin: 8px 0; font-size: 14px; }
+    .film { min-width: 220px; cursor: pointer; transition: transform 0.2s; }
+    .film:hover { transform: scale(1.05); }
+    .film img { width: 100%; height: 300px; object-fit: cover; border-radius: 5px; }
     #playerBox { display: none; padding: 20px 40px; }
-    #playerBox video { width: 100%; max-width: 1000px; background: black; border-radius: 5px; }
-    #close { float: right; font-size: 30px; cursor: pointer; color: #E50914; }
+    #playerBox video { width: 100%; max-width: 1000px; background: black; }
+    #close { font-size: 30px; cursor: pointer; color: #E50914; float: right; }
   </style>
 </head>
 <body>
-  <header>MeinNetflix - Kostenlose Klassiker</header>
+  <header>MeinNetflix - Public Domain</header>
 
-  <h2>Horror & Mystery</h2>
+  <h2>Kostenlose Klassiker die laufen</h2>
   <div class="reihe">
-    <div class="film" onclick="play('https://archive.org/download/nosferatu/nosferatu_512kb.mp4')">
-      <img src="https://image.tmdb.org/t/p/w500/5kY2GpiZ9dE8J0WQ6G3J1Q1Q1Q1.jpg"><p>Nosferatu 1922</p>
+    <div class="film" onclick="play('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', 'Big Buck Bunny')">
+      <img src="https://picsum.photos/220/300?1"><p>Big Buck Bunny</p>
     </div>
-    <div class="film" onclick="play('https://archive.org/download/NightOfTheLivingDead/night_of_the_living_dead.mp4')">
-      <img src="https://image.tmdb.org/t/p/w500/aQvJ5WPzZgYVDrxLX4RwKZ1h0bV.jpg"><p>Night of the Living Dead 1968</p>
+    <div class="film" onclick="play('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', 'Elephants Dream')">
+      <img src="https://picsum.photos/220/300?2"><p>Elephants Dream</p>
     </div>
-  </div>
-
-  <h2>Komödie & Stummfilm</h2>
-  <div class="reihe">
-    <div class="film" onclick="play('https://archive.org/download/charliechaplinmoderntimes/modern_times.mp4')">
-      <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg"><p>Modern Times - Chaplin</p>
-    </div>
-    <div class="film" onclick="play('https://archive.org/download/citylights/citylights.mp4')">
-      <img src="https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"><p>City Lights - Chaplin</p>
-    </div>
-    <div class="film" onclick="play('https://archive.org/download/TheGreatDictator/TheGreatDictator.mp4')">
-      <img src="https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"><p>The Great Dictator</p>
-    </div>
-  </div>
-
-  <h2>Sci-Fi & Fantasy</h2>
-  <div class="reihe">
-    <div class="film" onclick="play('https://archive.org/download/PlanetNineFromOuterSpace/Plan9FromOuterSpace.mp4')">
-      <img src="https://image.tmdb.org/t/p/w500/6Wdl9N6dL0Hi0T1q5smLKs2M1pC.jpg"><p>Plan 9 From Outer Space</p>
-    </div>
-    <div class="film" onclick="play('https://archive.org/download/metropolis1927/Metropolis_512kb.mp4')">
-      <img src="https://image.tmdb.org/t/p/w500/aQvJ5WPzZgYVDrxLX4RwKZ1h0bV.jpg"><p>Metropolis 1927</p>
+    <div class="film" onclick="play('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4', 'Sintel')">
+      <img src="https://picsum.photos/220/300?3"><p>Sintel</p>
     </div>
   </div>
 
   <div id="playerBox">
     <span id="close" onclick="closePlayer()">× Schließen</span>
+    <h2 id="titel"></h2>
     <video id="player" controls autoplay></video>
   </div>
 
   <script>
-    function play(url) {
+    function play(url, name) {
+      document.getElementById('titel').innerText = name;
       document.getElementById('playerBox').style.display = 'block';
       document.getElementById('player').src = url;
       document.getElementById('player').scrollIntoView();
